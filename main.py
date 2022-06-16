@@ -50,21 +50,30 @@ class handleAscii:
                 matRot[f].append(m[len(m)-1-f][len(m[f])-1-c]);
         return matRot;
 
-    def rotAntihor180(self, m): 
-        N = len(m) 
+    # def rotAntihor180(self, m): 
+    #     N = len(m) 
 
-        for i in range(N // 2):
-            for j in range(N):
-                temp = m[i][j]
-                m[i][j] = m[N - i - 1][N - j - 1]
-                m[N - i - 1][N - j - 1] = temp
+    #     for i in range(N // 2):
+    #         for j in range(N):
+    #             temp = m[i][j]
+    #             m[i][j] = m[N - i - 1][N - j - 1]
+    #             m[N - i - 1][N - j - 1] = temp
 
-        for j in range(N // 2):
-            temp = m[N // 2][j]
-            m[N // 2][j] = m[N // 2][N - j - 1]
-            m[N // 2][N - j - 1] = temp
+    #     for j in range(N // 2):
+    #         temp = m[N // 2][j]
+    #         m[N // 2][j] = m[N // 2][N - j - 1]
+    #         m[N // 2][N - j - 1] = temp
 
-        return m;
+    #     return m;
+
+    def rotAntihor180(self, mat):
+        m2 = [];
+
+        for f in range(len(mat)):
+            m2.append([])
+            for c in range(len(mat[f])):
+                m2[f].append(mat[len(mat)-1-f][len(mat[f])-1-c]);
+        return m2;
 
     def rotHor90(self, m):
         arrFi = [];
@@ -128,6 +137,8 @@ class handleAscii:
 
     def freqChar(self, mat):
         freqCharDict = dict();
+
+
 
         for f in range(len(mat)):
             for c in range(len(mat[f])):
