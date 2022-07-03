@@ -1,6 +1,5 @@
-from distutils.debug import DEBUG
 import colorama, os;
-from colorama import Back, Fore, Style;
+from colorama import Fore, Style;
 
 # General
 colorama.init(autoreset=True);
@@ -10,6 +9,9 @@ whiCo = Fore.WHITE ;
 
 class handleAscii:
     routeDefault = "ascii/a6.txt";
+
+    def __init__(self):
+        self.handleWelcome();
 
     def addPath(self):
         print(f"\n{redCo}[!]{whiCo} Para continuar inserta el nombre del archivo {yellCo}[txt]");
@@ -49,22 +51,6 @@ class handleAscii:
             for c in range(len(m[f])):
                 matRot[f].append(m[len(m)-1-f][len(m[f])-1-c]);
         return matRot;
-
-    # def rotAntihor180(self, m): 
-    #     N = len(m) 
-
-    #     for i in range(N // 2):
-    #         for j in range(N):
-    #             temp = m[i][j]
-    #             m[i][j] = m[N - i - 1][N - j - 1]
-    #             m[N - i - 1][N - j - 1] = temp
-
-    #     for j in range(N // 2):
-    #         temp = m[N // 2][j]
-    #         m[N // 2][j] = m[N // 2][N - j - 1]
-    #         m[N // 2][N - j - 1] = temp
-
-    #     return m;
 
     def rotAntihor180(self, mat):
         m2 = [];
@@ -138,8 +124,6 @@ class handleAscii:
     def freqChar(self, mat):
         freqCharDict = dict();
 
-
-
         for f in range(len(mat)):
             for c in range(len(mat[f])):
                 if mat[f][c] not in freqCharDict:
@@ -183,14 +167,15 @@ class handleAscii:
         os.system('cls' if os.name=='nt' else 'clear');
 
     def handleMenu(self):
-        optArr = ["Salir del programa",
-                "Imprimir Ascii Art", 
-                "Rotar 90 grados en sentido Horario", 
-                "Rotar 90 grados en sentido Antihorario", 
-                "Rotar 180 grados en sentido Horario",
-                "Rotar 180 grados en sentido Antihorario",
-                "Mostrar frecuencia de carácteres",
-                "Cargar ascii"];
+        optArr = [  "Salir del programa",
+                    "Imprimir Ascii Art", 
+                    "Rotar 90 grados en sentido Horario", 
+                    "Rotar 90 grados en sentido Antihorario", 
+                    "Rotar 180 grados en sentido Horario",
+                    "Rotar 180 grados en sentido Antihorario",
+                    "Mostrar frecuencia de carácteres",
+                    "Cargar ascii"
+                ];
         idx = 0;
         self.asciiSeparator();
         for opt in optArr:
@@ -240,7 +225,6 @@ class handleAscii:
 
 def main():
     handA = handleAscii();
-    handA.handleWelcome();
 
 if __name__ == "__main__":
     main();
