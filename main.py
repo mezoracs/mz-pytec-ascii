@@ -139,6 +139,37 @@ class handleAscii:
         print(f"\n{Fore.RED}Nos vemos pronto!{Fore.WHITE} Gracias por utilizar el programa!")
         return exit();
 
+    def returnAsciiWrite(self, m, route):
+        with open(route, "w") as f:
+            for fi in m:
+                for c in fi:
+                    f.write(c);
+                f.write("\n");
+        pass;
+
+    def saveFile(self):
+        print(f"{redCo}[!]{whiCo} Para continuar, brinda el nombre con el que quieres que se guarde su archivo! {yellCo}[Se guardará como .txt]");
+        print(f"\n{redCo}>> ", end="");
+        opt = str(input(""));
+
+        file = open(f"saved/{opt}", "w");
+        routeF = f"saved/{opt}.txt"
+        if os.path.exists(routeF):
+            print(f"\n[!] Atención, el archivo: {yellCo}saved/{opt}{whiCo}.txt ya existe!");
+            print(f"[!] Deseas sobreescribirlo? {yellCo}[s/n]{whiCo}!\n");
+            opt = str(input(f"{redCo}>> "));
+            
+            if opt == "s":
+                self.returnAsciiWrite(self.getMatrixImg(self.routeDefault), routeF);
+                print(f"\n[!] Perfecto! el archivo: {yellCo}saved/{opt}{whiCo}.txt se grabó correctamente!\n");
+            elif opt == "n":
+                print(f"\n[!] Cancelando operación ...")
+            else:
+                print(f"\n[!] Opción inválida! Cancelando operación ...")
+        else:
+            print(f"\n[!] Perfecto! el archivo: {yellCo}saved/{opt}{whiCo}.txt se grabó correctamente!\n");
+            self.returnAsciiWrite(self.getMatrixImg(self.routeDefault), routeF);
+
     def handleOptMenu(self, opt):
         matAsc = self.getMatrixImg(self.routeDefault);
         if opt == 0:
@@ -157,6 +188,8 @@ class handleAscii:
             self.freqChar(matAsc);
         elif opt == 7:
             self.addPath();
+        elif opt == 8:
+            self.saveFile();
             pass;
         self.handleMenu();
 
@@ -174,7 +207,8 @@ class handleAscii:
                     "Rotar 180 grados en sentido Horario",
                     "Rotar 180 grados en sentido Antihorario",
                     "Mostrar frecuencia de carácteres",
-                    "Cargar ascii"
+                    "Cargar ascii",
+                    "Grabar en archivo"
                 ];
         idx = 0;
         self.asciiSeparator();
@@ -225,6 +259,7 @@ class handleAscii:
 
 def main():
     handA = handleAscii();
+    handA();
 
 if __name__ == "__main__":
     main();
