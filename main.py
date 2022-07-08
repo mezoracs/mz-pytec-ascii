@@ -26,24 +26,6 @@ class handleAscii:
         else:
             print(f"\n{redCo}[!]{whiCo} Error! El archivo en la ubicación {yellCo}ascii/{p}{whiCo} no existe.\n");
 
-    def handleChar(self, m):
-        dictChar = { 
-            "_" : "-",
-            "/" : "\ ",
-            "-" : "_",
-            "(" : ")",
-            ")" : "(",
-            "´" : "'",
-            "'"  : "´",
-            "?" : "¿",
-            "¿" : "?",
-            "!" : "¡",
-            "¡" : "!"
-            }
-        for f in range(m):
-            for c in range(m[f]):
-                pass;
-    
     def rotHor180(self, m):
         matRot = [];
         for f in range(len(m)):
@@ -54,7 +36,6 @@ class handleAscii:
 
     def rotAntihor180(self, mat):
         m2 = [];
-
         for f in range(len(mat)):
             m2.append([])
             for c in range(len(mat[f])):
@@ -63,11 +44,9 @@ class handleAscii:
 
     def rotHor90(self, m):
         arrFi = [];
-        
         co = 0;
         fi = 0;
         mLen = len(m)-1;
-
         for f in range(len(m[0])):
             fi = 0;
             arrFi.append([]);
@@ -78,7 +57,7 @@ class handleAscii:
         return arrFi;
 
     def rotAntihor90(self, m): 
-        return [[m[j][i] for j in range(len(m))] for i in range(len(m[0])-1,-1,-1)]
+        return [[m[j][i] for j in range(len(m))] for i in range(len(m[0])-1,-1,-1)];
 
     def printMatrix(self, m, route):
         print(f"\n{redCo}[!]{whiCo} Ruta de la matriz impresa: {yellCo}[{route}]", "\n");
@@ -103,14 +82,12 @@ class handleAscii:
         ascStr = ascFile.read().split("\n");
         arrAsc = [];
         matAsc = [];
-
         idx = 0;
         for line in ascStr:
             arrAsc.append([]);
             for c in line:
                 arrAsc[idx].append(c);
             idx += 1;
-
         ascMaxLen = self.getMaxLenArr(arrAsc);
         for f in range(len(arrAsc)):
             matAsc.append([]);
@@ -123,13 +100,11 @@ class handleAscii:
 
     def freqChar(self, mat):
         freqCharDict = dict();
-
         for f in range(len(mat)):
             for c in range(len(mat[f])):
                 if mat[f][c] not in freqCharDict:
                     freqCharDict[mat[f][c]] = 0;
                 freqCharDict[mat[f][c]] += 1;
-        
         print();
         for char, val in freqCharDict.items():
             print(f"Carácter: %-5s {yellCo}%-10s{whiCo} Frecuencia: %-10s" % (char, "<-->",val));
@@ -151,14 +126,12 @@ class handleAscii:
         print(f"{redCo}[!]{whiCo} Para continuar, brinda el nombre con el que quieres que se guarde su archivo! {yellCo}[Se guardará como .txt]");
         print(f"\n{redCo}>> ", end="");
         opt = str(input(""));
-
         file = open(f"saved/{opt}", "w");
         routeF = f"saved/{opt}.txt"
         if os.path.exists(routeF):
             print(f"\n[!] Atención, el archivo: {yellCo}saved/{opt}{whiCo}.txt ya existe!");
             print(f"[!] Deseas sobreescribirlo? {yellCo}[s/n]{whiCo}!\n");
             opt = str(input(f"{redCo}>> "));
-            
             if opt == "s":
                 self.returnAsciiWrite(self.getMatrixImg(self.routeDefault), routeF);
                 print(f"\n[!] Perfecto! el archivo: {yellCo}saved/{opt}{whiCo}.txt se grabó correctamente!\n");
@@ -216,9 +189,7 @@ class handleAscii:
             print(f"{Fore.RED}{Style.BRIGHT}[{idx}]{Fore.WHITE} {opt}.");
             idx += 1;
         self.asciiSeparator();
-        
         print(f"\n{Fore.RED}>>{Fore.WHITE} ", end="");
-        
         while True:
             opt = int(input());
             if opt in range(0, len(optArr)):
@@ -227,7 +198,6 @@ class handleAscii:
                 print(f"\n{Fore.YELLOW}{Style.BRIGHT}[Atención]{Fore.WHITE} Ingresa un número válido para continuar...")
                 print(f"{Fore.RED}>>{Fore.WHITE} ", end="");
                 continue;
-        
         self.handleOptMenu(opt);
 
     def handleWelcome(self):
@@ -244,22 +214,18 @@ class handleAscii:
        \:\__\        \:\__\      \:\__\      \::/  /       \::/  /   
         \/__/         \/__/       \/__/       \/__/         \/__/    
         """
-
         self.clearConsole();
         self.asciiSeparator();
         print(Fore.RED + asciiLogo);
         self.asciiSeparator();
-
         print("\n");
         print(f"-> {Fore.YELLOW}Hola!{Fore.WHITE} Bienvenido a la interfaz de {Fore.RED}{Style.BRIGHT}Pytec{Fore.WHITE} aquí verás un listado de opciones.")
         print(f"-> Para continuar, {Fore.YELLOW}selecciona una de ellas{Fore.WHITE}, eligiendo su {Fore.YELLOW}número{Fore.WHITE} correspondiente.");
         print("\n");
-
         self.handleMenu();
 
 def main():
-    handA = handleAscii();
-    handA();
+    handleAscii();
 
 if __name__ == "__main__":
     main();
